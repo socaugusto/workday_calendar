@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "windows-msvc",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "msvc-x64-debug",
+            "displayName": "x64 Debug (MSVC)",
+            "inherits": "windows-msvc",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "msvc-x64-release",
+            "displayName": "x64 Release (MSVC)",
+            "inherits": "msvc-x64-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ]
+}
