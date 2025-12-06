@@ -7,6 +7,7 @@ add_executable(workdaycalendartests
 target_link_libraries(workdaycalendartests
     PRIVATE
         GTest::gtest_main
+        workdaycalendarlib
 )
 
 include(GoogleTest)

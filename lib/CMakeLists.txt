@@ -8,3 +8,17 @@ target_include_directories(workdaycalendarlib
     PUBLIC
         ./include    
 )
+
+if(MSVC)
+    target_compile_options(workdaycalendarlib 
+        PRIVATE
+            /Wall 
+            /WX 
+            /std:c++20 
+            /permissive- 
+            /Zc:preprocessor
+            /wd4996 
+            /wd4820
+            /wd5045
+    )
+endif()

@@ -7,6 +7,7 @@ project(WorkdayCalendar LANGUAGES CXX)
 # C++ language requirements
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # GoogleTest
 # https://google.github.io/googletest/quickstart-cmake.html
