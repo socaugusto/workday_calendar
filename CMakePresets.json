@@ -71,5 +71,27 @@
                 "CMAKE_BUILD_TYPE": "Release"
             }
         }
+    ],
+    "buildPresets": [
+        {
+            "name": "msvc-x64-debug-build",
+            "configurePreset": "msvc-x64-debug",
+            "configuration": "Debug"
+        },
+        {
+            "name": "msvc-x64-release-build",
+            "configurePreset": "msvc-x64-release",
+            "configuration": "Release"
+        },
+        {
+            "name": "linux-gcc-debug-build",
+            "configurePreset": "linux-gcc-debug",
+            "configuration": "Debug"
+        },
+        {
+            "name": "linux-gcc-release-build",
+            "configurePreset": "linux-gcc-release",
+            "configuration": "Release"
+        }
     ]
 }
