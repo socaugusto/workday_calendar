@@ -372,9 +372,11 @@ TEST_P(WorkdayCalendarKata, scenarios)
     ASSERT_EQ(result.date.year(), year{ry});
 }
 
-INSTANTIATE_TEST_SUITE_P(KataScenarios, WorkdayCalendarKata,
-                         testing::Values(KataScenario{-5.5f, 18, 5, 2004, std::chrono::May, 14, 12, 0},
-                                         KataScenario{44.723656f, 19, 3, 2004, std::chrono::July, 27, 13, 47},
-                                         KataScenario{-6.7470217f, 18, 3, 2004, std::chrono::May, 13, 10, 1},
-                                         KataScenario{12.782709f, 8, 3, 2004, std::chrono::June, 10, 14, 18},
-                                         KataScenario{8.276628f, 7, 3, 2004, std::chrono::June, 4, 10, 12}));
+INSTANTIATE_TEST_SUITE_P(
+    KataScenarios,
+    WorkdayCalendarKata,
+    testing::Values(KataScenario{-5.5f, 18, 5, 2004, std::chrono::May, 14, 12, 0},
+                    KataScenario{44.723656f, 19, 3, 2004, std::chrono::July, 27, 13, 47},
+                    KataScenario{-6.7470217f, 18, 3, 2004, std::chrono::May, 13, 10, 1},
+                    KataScenario{12.782709f, 8, 3, 2004, std::chrono::June, 10, 14, 18},
+                    KataScenario{8.276628f, 7, 3, 2004, std::chrono::June, 4, 10, 12}));

@@ -160,8 +160,11 @@ TEST_P(GregorianCalendar30DaysMonths, invalidDay31thInApril_clampTo30)
     EXPECT_EQ(dt.date.day(), day{d31 - 1u});
 }
 
-INSTANTIATE_TEST_SUITE_P(AprilJuneSeptemberNovember, GregorianCalendar30DaysMonths,
-                         testing::Values(std::chrono::April, std::chrono::June, std::chrono::September,
+INSTANTIATE_TEST_SUITE_P(AprilJuneSeptemberNovember,
+                         GregorianCalendar30DaysMonths,
+                         testing::Values(std::chrono::April,
+                                         std::chrono::June,
+                                         std::chrono::September,
                                          std::chrono::November));
 
 /*

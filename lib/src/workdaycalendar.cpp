@@ -20,15 +20,21 @@ struct Holidays
     std::span<const Date> recurring;
 };
 
-WorkdayDurationsInMinutes calculateTimeDuration(Time startTime, float incrementWorkdays, Time startWorkday,
+WorkdayDurationsInMinutes calculateTimeDuration(Time startTime,
+                                                float incrementWorkdays,
+                                                Time startWorkday,
                                                 Time stopWorkday);
 
-Time calculateEndTime(minutes startTime, time_point<system_clock, minutes> &timePoint,
+Time calculateEndTime(minutes startTime,
+                      time_point<system_clock, minutes> &timePoint,
                       const WorkdayDurationsInMinutes &time);
 
-Date calculateEndDate(float incrementWorkdays, time_point<system_clock, minutes> timePoint, Holidays holidays);
+Date calculateEndDate(float incrementWorkdays,
+                      time_point<system_clock, minutes> timePoint,
+                      Holidays holidays);
 
-time_point<system_clock, minutes> clampStartDate(float incrementWorkdays, time_point<system_clock, minutes> timePoint,
+time_point<system_clock, minutes> clampStartDate(float incrementWorkdays,
+                                                 time_point<system_clock, minutes> timePoint,
                                                  Holidays holidays);
 
 time_point<system_clock, minutes> makeTimepoint(DateTime dt);
@@ -48,7 +54,8 @@ void WorkdayCalendar::setRecurringHoliday(GregorianCalendar date)
     recurringHolidays_.push_back(date.getDate());
 }
 
-void WorkdayCalendar::setWorkdayStartAndStop(GregorianCalendar startTime, GregorianCalendar stopTime)
+void WorkdayCalendar::setWorkdayStartAndStop(GregorianCalendar startTime,
+                                             GregorianCalendar stopTime)
 {
     start_ = startTime.getTime();
     stop_ = stopTime.getTime();
@@ -60,7 +67,8 @@ DateTime WorkdayCalendar::getWorkdayIncrement(DateTime startDate, float incremen
     Holidays holidays{.nonRecurring = nonRecurringHolidays_, .recurring = recurringHolidays_};
 
     days increment = calculateIncrement(incrementWorkdays);
-    WorkdayDurationsInMinutes timeInMinutes = calculateTimeDuration(startDate.time, incrementWorkdays, start_, stop_);
+    WorkdayDurationsInMinutes timeInMinutes
+        = calculateTimeDuration(startDate.time, incrementWorkdays, start_, stop_);
 
     auto correctedStartTime = clampStartTime(timeInMinutes);
     auto timePoint = makeTimepoint(startDate);
@@ -74,15 +82,17 @@ DateTime WorkdayCalendar::getWorkdayIncrement(DateTime startDate, float incremen
 
 namespace
 {
-WorkdayDurationsInMinutes calculateTimeDuration(Time startTime, float incrementWorkdays, Time startWorkday,
+WorkdayDurationsInMinutes calculateTimeDuration(Time startTime,
+                                                float incrementWorkdays,
+                                                Time startWorkday,
                                                 Time stopWorkday)
 {
     WorkdayDurationsInMinutes result{};
 
     days incrementInDays{static_cast<int>(incrementWorkdays)};
     result.workDay = duration_cast<minutes>(stopWorkday.to_duration() - startWorkday.to_duration());
-    result.increment =
-        floor<minutes>(result.workDay * (incrementWorkdays - static_cast<float>(incrementInDays.count())));
+    result.increment = floor<minutes>(
+        result.workDay * (incrementWorkdays - static_cast<float>(incrementInDays.count())));
 
     result.startWorkday = duration_cast<minutes>(startWorkday.to_duration());
     result.stopWorkday = duration_cast<minutes>(stopWorkday.to_duration());
@@ -109,7 +119,8 @@ minutes clampStartTime(const WorkdayDurationsInMinutes &time)
     return result;
 }
 
-Time calculateEndTime(minutes startTime, time_point<system_clock, minutes> &timePoint,
+Time calculateEndTime(minutes startTime,
+                      time_point<system_clock, minutes> &timePoint,
                       const WorkdayDurationsInMinutes &time)
 {
     auto result = startTime;
@@ -132,7 +143,9 @@ Time calculateEndTime(minutes startTime, time_point<system_clock, minutes> &time
     return hh_mm_ss{result};
 }
 
-Date calculateEndDate(float incrementWorkdays, time_point<system_clock, minutes> timePoint, Holidays holidays)
+Date calculateEndDate(float incrementWorkdays,
+                      time_point<system_clock, minutes> timePoint,
+                      Holidays holidays)
 {
     days increment = calculateIncrement(incrementWorkdays);
 
@@ -154,7 +167,8 @@ Date calculateEndDate(float incrementWorkdays, time_point<system_clock, minutes>
     return current;
 }
 
-time_point<system_clock, minutes> clampStartDate(float incrementWorkdays, time_point<system_clock, minutes> timePoint,
+time_point<system_clock, minutes> clampStartDate(float incrementWorkdays,
+                                                 time_point<system_clock, minutes> timePoint,
                                                  Holidays holidays)
 {
     days increment = calculateIncrement(incrementWorkdays);

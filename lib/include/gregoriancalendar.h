@@ -14,7 +14,10 @@ class GregorianCalendar
   public:
     GregorianCalendar(int16_t year, Month month, uint8_t day, uint8_t hour, uint8_t minute);
 
-    GregorianCalendar(std::chrono::year, std::chrono::month, std::chrono::day, std::chrono::hours,
+    GregorianCalendar(std::chrono::year,
+                      std::chrono::month,
+                      std::chrono::day,
+                      std::chrono::hours,
                       std::chrono::minutes);
 
     GregorianCalendar(DateTime);

@@ -18,5 +18,6 @@ int main(int, char **)
     float increment = -5.5f;
     DateTime result = workdayCalendar.getWorkdayIncrement(start, increment);
 
-    std::cout << f.format(start) << " with the addition of " << increment << " working days is " << f.format(result);
+    std::cout << f.format(start) << " with the addition of " << increment << " working days is "
+              << f.format(result);
 }
